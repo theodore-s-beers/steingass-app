@@ -39,9 +39,9 @@
 
 		term = normalize(term);
 
-		localStorage.setItem('steingassAlphaField', field);
-		localStorage.setItem('steingassAlphaVerb', matchType);
-		localStorage.setItem('steingassAlphaTerm', term);
+		localStorage.setItem('steingassFieldV1', field);
+		localStorage.setItem('steingassVerbV1', matchType);
+		localStorage.setItem('steingassTermV1', term);
 
 		try {
 			const res = await fetch(
@@ -62,16 +62,16 @@
 
 	function clear() {
 		term = '';
-		localStorage.removeItem('steingassAlphaTerm');
+		localStorage.removeItem('steingassTermV1');
 		results = [];
 		hints = [];
 		loading = false;
 	}
 
 	onMount(() => {
-		field = localStorage.getItem('steingassAlphaField') || field;
-		matchType = localStorage.getItem('steingassAlphaVerb') || matchType;
-		term = localStorage.getItem('steingassAlphaTerm') || term;
+		field = localStorage.getItem('steingassFieldV1') || field;
+		matchType = localStorage.getItem('steingassVerbV1') || matchType;
+		term = localStorage.getItem('steingassTermV1') || term;
 
 		if (term) query();
 	});
@@ -84,8 +84,8 @@
 		content="Improved digitized version of Francis Joseph Steingass’ “Comprehensive Persian-English Dictionary”"
 	/>
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://steingass-alpha.pages.dev/" />
-	<meta property="og:image" content="https://steingass-alpha.pages.dev/og.jpg" />
+	<meta property="og:url" content="https://steingass.theobeers.com/" />
+	<meta property="og:image" content="https://steingass.theobeers.com/og.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={title} />
 </svelte:head>
