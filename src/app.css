@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'GentiumPlus';
+		font-style: normal;
+		font-weight: 400;
+		size-adjust: 115%;
+		src: url('/fonts/GentiumPlus-Regular.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'GentiumPlus';
+		font-style: italic;
+		font-weight: 400;
+		size-adjust: 115%;
+		src: url('/fonts/GentiumPlus-Italic.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'GentiumPlus';
+		font-style: normal;
+		font-weight: 700;
+		size-adjust: 115%;
+		src: url('/fonts/GentiumPlus-Bold.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'GentiumPlus';
+		font-style: italic;
+		font-weight: 700;
+		size-adjust: 115%;
+		src: url('/fonts/GentiumPlus-BoldItalic.woff2') format('woff2');
+	}
+}
