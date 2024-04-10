@@ -58,6 +58,11 @@ export async function GET({ platform, url }) {
 		return new Response('Something went wrong', { status: 500 });
 	}
 
+	// Return results in plain text if requested
+	if (url.searchParams.get('plain-text') === 'true') {
+		return new Response(toPlain(results));
+	}
+
 	return new Response(JSON.stringify(results));
 }
 
@@ -75,4 +80,20 @@ function parseField(field: string): string {
 	}
 
 	return 'ft_all';
+}
+
+function toPlain(input: Entry[]): string {
+	let output = '';
+
+	for (let i = 0; i < input.length; i++) {
+		for (const [key, value] of Object.entries(input[i])) {
+			output += `${key}: ${value}\n`;
+		}
+
+		if (i < input.length - 1) {
+			output += '\n';
+		}
+	}
+
+	return output;
 }
