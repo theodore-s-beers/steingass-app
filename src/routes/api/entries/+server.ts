@@ -9,6 +9,7 @@ export async function GET({ platform, url }) {
 	const field = url.searchParams.get('field');
 	const matchType = url.searchParams.get('match-type');
 	const term = url.searchParams.get('term');
+	const plainText = url.searchParams.get('plain-text');
 
 	// If any parameters are missing, return 400
 	if (!field || !matchType || !term) {
@@ -27,6 +28,10 @@ export async function GET({ platform, url }) {
 
 		if (results.length === 0) {
 			return new Response('No results found', { status: 404 });
+		}
+
+		if (plainText === 'true') {
+			return new Response(toPlain(results));
 		}
 
 		return new Response(JSON.stringify(results));
@@ -59,7 +64,7 @@ export async function GET({ platform, url }) {
 	}
 
 	// Return results in plain text if requested
-	if (url.searchParams.get('plain-text') === 'true') {
+	if (plainText === 'true') {
 		return new Response(toPlain(results));
 	}
 
