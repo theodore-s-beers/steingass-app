@@ -154,6 +154,12 @@
 {#if loading}
 	<p>Loading…</p>
 {:else}
+	<p><span class="font-semibold">Results:</span> {results.length}</p>
+
+	{#if results.length === 50}
+		<p><em>Limited to 50</em></p>
+	{/if}
+
 	{#if results.length > 0}
 		<p>
 			<a
@@ -163,10 +169,6 @@
 				class="text-blue-700 hover:underline">API link for this query</a
 			>
 		</p>
-	{/if}
-	<p><span class="font-semibold">Results:</span> {results.length}</p>
-	{#if results.length === 50}
-		<p><em>Limited to 50</em></p>
 	{/if}
 {/if}
 
