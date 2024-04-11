@@ -78,6 +78,9 @@
 		<div class="font-semibold">HW (Per.)</div>
 		<div class="font-mix">{entry.headword_persian}</div>
 
+		<div class="font-semibold">Abjad</div>
+		<div>{entry.abjad}</div>
+
 		<div class="font-semibold">HW (Lat.)</div>
 		<div class="font-mix">{@html marked.parseInline(entry.headword_latin)}</div>
 
