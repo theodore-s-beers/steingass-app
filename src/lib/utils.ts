@@ -4,9 +4,9 @@ export interface Entry {
 	lang: string;
 	headword_full: string;
 	headword_persian: string;
+	abjad: number;
 	headword_latin: string;
 	definitions: string;
-	abjad: number;
 }
 
 export async function fetchHints(term: string): Promise<string[]> {
