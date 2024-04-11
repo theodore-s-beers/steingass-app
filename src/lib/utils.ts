@@ -6,6 +6,7 @@ export interface Entry {
 	headword_persian: string;
 	headword_latin: string;
 	definitions: string;
+	abjad: number;
 }
 
 export async function fetchHints(term: string): Promise<string[]> {
