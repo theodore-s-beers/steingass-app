@@ -37,3 +37,19 @@ export function normalize(input: string): string {
 
 	return input.replaceAll(reK, perK).replaceAll(reY, perY).replaceAll(reApos, rQuo);
 }
+
+export function toPlain(input: Entry[]): string {
+	let output = '';
+
+	for (let i = 0; i < input.length; i++) {
+		for (const [key, value] of Object.entries(input[i])) {
+			output += `${key}: ${value}\n`;
+		}
+
+		if (i < input.length - 1) {
+			output += '\n';
+		}
+	}
+
+	return output;
+}
