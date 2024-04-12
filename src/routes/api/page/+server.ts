@@ -7,7 +7,7 @@ export async function GET({ platform, url }) {
 	}
 
 	const parsed = parseInt(pageNumber);
-	if (parsed < 1 || parsed > 1539) {
+	if (parsed < 1 || parsed > 1_539) {
 		return new Response('Invalid page number', { status: 400 });
 	}
 
