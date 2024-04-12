@@ -13,7 +13,7 @@ export async function GET({ platform, url }) {
 		return new Response('Abjad value out of scope', { status: 400 });
 	}
 
-	const sql = 'SELECT * FROM entries WHERE abjad = ?';
+	const sql = 'SELECT id, headword_persian FROM entries WHERE abjad = ?';
 	const stmt = platform!.env.DB.prepare(sql).bind(value);
 	const { results } = await stmt.all<Entry>();
 
