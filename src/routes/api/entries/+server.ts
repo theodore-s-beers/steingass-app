@@ -1,4 +1,4 @@
-import { type Entry } from '$lib/utils';
+import { type Entry, toPlain } from '$lib/utils';
 
 interface IdEntry {
 	rowid: number;
@@ -85,20 +85,4 @@ function parseField(field: string): string {
 	}
 
 	return 'ft_all';
-}
-
-function toPlain(input: Entry[]): string {
-	let output = '';
-
-	for (let i = 0; i < input.length; i++) {
-		for (const [key, value] of Object.entries(input[i])) {
-			output += `${key}: ${value}\n`;
-		}
-
-		if (i < input.length - 1) {
-			output += '\n';
-		}
-	}
-
-	return output;
 }

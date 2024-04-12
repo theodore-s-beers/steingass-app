@@ -7,7 +7,7 @@ export async function GET({ platform, url }) {
 	}
 
 	const parsed = parseInt(id);
-	if (parsed < 1 || parsed > 69888) {
+	if (parsed < 1 || parsed > 69_888) {
 		return new Response('Invalid entry ID', { status: 400 });
 	}
 
