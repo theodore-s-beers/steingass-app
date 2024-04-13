@@ -4,7 +4,10 @@
 	import { type AbjadEntry } from '$lib/utils';
 
 	$: abjadValue = $page.params.slug;
+	$: prev = Number(abjadValue) - 1;
+	$: next = Number(abjadValue) + 1;
 	$: title = `Steingass – Abjad value ${abjadValue}`;
+
 	let loading = true;
 	let entries: AbjadEntry[] = [];
 	$: count = entries.length;
@@ -36,8 +39,10 @@
 	<title>{title}</title>
 </svelte:head>
 
-<div class="mb-4 flex justify-center">
+<div class="mb-4 flex justify-between">
+	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. val.</a>
 	<a href="/" class="text-blue-700 hover:underline">Home</a>
+	<a href={String(next)} class="text-blue-700 hover:underline">Next val.</a>
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>
@@ -58,3 +63,13 @@
 		</li>
 	{/each}
 </ul>
+
+{#if entries.length > 20}
+	<hr class="my-4 border border-dashed border-gray-400" />
+
+	<div class="flex justify-between">
+		<a href={String(prev)} class="text-blue-700 hover:underline">Prev. val.</a>
+		<a href="/" class="text-blue-700 hover:underline">Home</a>
+		<a href={String(next)} class="text-blue-700 hover:underline">Next val.</a>
+	</div>
+{/if}
