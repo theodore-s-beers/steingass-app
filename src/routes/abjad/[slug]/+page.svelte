@@ -36,7 +36,7 @@
 	<title>{title}</title>
 </svelte:head>
 
-<div class="mb-4 flex justify-between">
+<div class="mb-4 flex justify-center">
 	<a href="/" class="text-blue-700 hover:underline">Home</a>
 </div>
 
