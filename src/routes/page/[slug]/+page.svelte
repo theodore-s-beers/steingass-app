@@ -91,10 +91,10 @@
 
 {#if entries.length > 0}
 	<hr class="my-4 border border-dashed border-gray-400" />
-{/if}
 
-<div class="flex justify-between">
-	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. p.</a>
-	<a href="/" class="text-blue-700 hover:underline">Home</a>
-	<a href={String(next)} class="text-blue-700 hover:underline">Next p.</a>
-</div>
+	<div class="flex justify-between">
+		<a href={String(prev)} class="text-blue-700 hover:underline">Prev. p.</a>
+		<a href="/" class="text-blue-700 hover:underline">Home</a>
+		<a href={String(next)} class="text-blue-700 hover:underline">Next p.</a>
+	</div>
+{/if}
