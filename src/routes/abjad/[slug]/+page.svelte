@@ -50,7 +50,7 @@
 
 <hr class="my-4 border border-dashed border-gray-400" />
 
-<ul class="list-disc">
+<ul class="list-inside list-disc">
 	{#each entries as entry}
 		<li>
 			<a href={'/entry/' + entry.id} class="text-blue-700 hover:underline">{entry.id}</a>:
