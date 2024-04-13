@@ -1,4 +1,4 @@
-import { type Entry, toPlain } from '$lib/utils';
+import { type AbjadEntry, toPlain } from '$lib/utils';
 
 export async function GET({ platform, url }) {
 	const valueParam = url.searchParams.get('value');
@@ -15,7 +15,7 @@ export async function GET({ platform, url }) {
 
 	const sql = 'SELECT id, headword_persian FROM entries WHERE abjad = ?';
 	const stmt = platform!.env.DB.prepare(sql).bind(value);
-	const { results } = await stmt.all<Entry>();
+	const { results } = await stmt.all<AbjadEntry>();
 
 	if (results.length === 0) {
 		return new Response('No results found', { status: 404 });

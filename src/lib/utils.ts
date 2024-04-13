@@ -1,3 +1,8 @@
+export interface AbjadEntry {
+	id: number;
+	headword_persian: string;
+}
+
 export interface Entry {
 	id: number;
 	page: number;
@@ -38,7 +43,7 @@ export function normalize(input: string): string {
 	return input.replaceAll(reK, perK).replaceAll(reY, perY).replaceAll(reApos, rQuo);
 }
 
-export function toPlain(input: Entry[]): string {
+export function toPlain(input: Entry[] | AbjadEntry[]): string {
 	let output = '';
 
 	for (let i = 0; i < input.length; i++) {
