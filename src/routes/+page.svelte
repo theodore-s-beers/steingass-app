@@ -174,7 +174,7 @@
 
 {#each results as entry}
 	<div
-		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 rounded-md border-2 border-dashed border-blue-700/50 p-4"
+		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
 	>
 		<div class="font-semibold">ID</div>
 		<div><a href={'/entry/' + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
@@ -199,7 +199,9 @@
 		<div class="font-mix">{entry.headword_persian}</div>
 
 		<div class="font-semibold">Abjad</div>
-		<div>{entry.abjad}</div>
+		<div>
+			<a href={`/abjad/${entry.abjad}`} class="text-blue-700 hover:underline">{entry.abjad}</a>
+		</div>
 
 		<div class="font-semibold">HW (Lat.)</div>
 		<div class="font-mix">{@html marked.parseInline(entry.headword_latin)}</div>
