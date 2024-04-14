@@ -51,7 +51,7 @@
 	<p>Loading…</p>
 {:else if entry}
 	<div
-		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 rounded-md border-2 border-dashed border-blue-700/50 p-4"
+		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
 	>
 		<div class="font-semibold">Page</div>
 		<div>
