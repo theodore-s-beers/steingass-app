@@ -79,14 +79,7 @@
 
 <svelte:head>
 	<title>{title}</title>
-	<meta
-		name="description"
-		content="Improved digitized version of Francis Joseph Steingass’ “Comprehensive Persian-English Dictionary”"
-	/>
-	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://steingass.theobeers.com/" />
-	<meta property="og:image" content="https://steingass.theobeers.com/og.jpg" />
-	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 

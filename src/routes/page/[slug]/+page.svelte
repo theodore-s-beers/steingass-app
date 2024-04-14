@@ -39,6 +39,8 @@
 
 <svelte:head>
 	<title>{title}</title>
+	<meta property="og:url" content={`https://steingass.theobeers.com/page/${pageNumber}`} />
+	<meta name="twitter:title" content={title} />
 </svelte:head>
 
 <div class="mb-4 flex justify-between">
