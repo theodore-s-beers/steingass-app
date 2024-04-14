@@ -8,7 +8,7 @@
 	$: padded = pageNumber.padStart(4, '0');
 	$: prev = Number(pageNumber) - 1;
 	$: next = Number(pageNumber) + 1;
-	$: title = `Steingass – p. ${pageNumber}`;
+	$: title = `Steingass – Page ${pageNumber}`;
 
 	let loading = true;
 	let entries: Entry[] = [];
