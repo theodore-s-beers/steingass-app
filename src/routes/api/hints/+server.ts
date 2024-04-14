@@ -8,8 +8,8 @@ export async function GET({ platform, url }) {
 		return new Response('No search term provided', { status: 400 });
 	}
 
-	const termPrefix = `${term}%`;
-	const sql = 'SELECT headword_persian FROM entries WHERE headword_persian LIKE ? LIMIT 20';
+	const termPrefix = `${term}*`;
+	const sql = 'SELECT headword_persian FROM ft_per WHERE ft_per MATCH ? LIMIT 20';
 	const stmt = platform!.env.DB.prepare(sql).bind(termPrefix);
 
 	const { results } = await stmt.all<HeadwordEntry>();
