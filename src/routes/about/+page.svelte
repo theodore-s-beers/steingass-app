@@ -26,8 +26,8 @@
 <p class="mb-4">
 	This is my favorite dictionary to use when reading classical Persian texts, and I think many
 	Persianists feel similarly. Steingass included both a solid number of entries (just under 70,000)
-	and, often, a great variety of definitions per entry. I usually find what I'm looking for—if not
-	more than what I'm looking for.
+	and, often, a great variety of definitions per entry. I usually find what I’m looking for—if not
+	more than what I’m looking for.
 </p>
 
 <p class="mb-4">
