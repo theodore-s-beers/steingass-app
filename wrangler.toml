@@ -3,8 +3,8 @@ compatibility_date = "2024-04-08"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "steingass-test-14"
-database_id = "fb3bcbf2-d1f9-4af1-92ce-4d79c7835cfd"
+database_name = "steingass-v1"
+database_id = "15bf1520-52e0-4f00-ae6a-0354fad9ccc5"
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
