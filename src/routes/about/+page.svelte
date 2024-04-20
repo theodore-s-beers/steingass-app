@@ -8,7 +8,7 @@
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 
-<div class="mb-4 flex justify-center">
+<div class="mb-3 flex justify-center">
 	<a href="/" class="text-blue-700 hover:underline">Home</a>
 </div>
 

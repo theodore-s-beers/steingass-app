@@ -41,7 +41,7 @@
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 
-<div class="mb-4 flex justify-between">
+<div class="mb-3 flex justify-between">
 	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. entry</a>
 	<a href="/" class="text-blue-700 hover:underline">Home</a>
 	<a href={String(next)} class="text-blue-700 hover:underline">Next entry</a>

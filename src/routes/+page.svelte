@@ -83,7 +83,7 @@
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 
-<div class="mb-4 flex justify-end">
+<div class="mb-3 flex justify-end">
 	<a href="/about" class="text-blue-700 hover:underline">About</a>
 </div>
 
