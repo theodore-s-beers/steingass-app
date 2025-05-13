@@ -29,6 +29,7 @@
 
 	afterNavigate(async () => {
 		loading = true;
+		entries = [];
 		const data = await fetchAbjad(abjadValue);
 		entries = data;
 		loading = false;
