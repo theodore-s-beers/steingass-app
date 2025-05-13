@@ -1,44 +1,7 @@
 name = "steingass"
-compatibility_date = "2024-04-08"
+compatibility_date = "2025-05-13"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "steingass-v1"
 database_id = "15bf1520-52e0-4f00-ae6a-0354fad9ccc5"
-
-# Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
-# Note: Use secrets to store sensitive data.
-# Docs: https://developers.cloudflare.com/workers/platform/environment-variables
-# [vars]
-# MY_VARIABLE = "production_value"
-
-# Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
-# Docs: https://developers.cloudflare.com/workers/runtime-apis/kv
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
-# Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
-# Bind another Worker service. Use this binding to call another Worker without network overhead.
-# Docs: https://developers.cloudflare.com/workers/platform/services
-# [[services]]
-# binding = "MY_SERVICE"
-# service = "my-service"
-
-# Bind a Durable Object. Durable objects are a scale-to-zero compute primitive based on the actor model.
-# Durable Objects can live for as long as needed. Use these when you need a long-running "server", such as in realtime apps.
-# Docs: https://developers.cloudflare.com/workers/runtime-apis/durable-objects
-# [[durable_objects.bindings]]
-# name = "MY_DURABLE_OBJECT"
-# class_name = "MyDurableObject"
-
-# Durable Object migrations.
-# Docs: https://developers.cloudflare.com/workers/learning/using-durable-objects#configure-durable-object-classes-with-migrations
-# [[migrations]]
-# tag = "v1"
-# new_classes = ["MyDurableObject"]

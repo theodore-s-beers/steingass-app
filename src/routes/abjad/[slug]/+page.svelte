@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { type AbjadEntry } from '$lib/utils';
+	import { afterNavigate } from "$app/navigation";
+	import { page } from "$app/state";
+	import { type AbjadEntry } from "$lib/utils";
 
-	$: abjadValue = $page.params.slug;
-	$: prev = Number(abjadValue) - 1;
-	$: next = Number(abjadValue) + 1;
-	$: title = `Steingass – Abjad value ${abjadValue}`;
+	let abjadValue = $derived(page.params.slug);
+	let prev = $derived(Number(abjadValue) - 1);
+	let next = $derived(Number(abjadValue) + 1);
+	let title = $derived(`Steingass – Abjad value ${abjadValue}`);
 
-	let loading = true;
-	let entries: AbjadEntry[] = [];
-	$: count = entries.length;
+	let loading = $state(true);
+	let entries: AbjadEntry[] = $state([]);
+	let count = $derived(entries.length);
 
 	async function fetchAbjad(value: string): Promise<AbjadEntry[]> {
 		try {
-			const res = await fetch('/api/abjad?' + new URLSearchParams({ value }));
+			const res = await fetch("/api/abjad?" + new URLSearchParams({ value }));
 			if (!res.ok) {
 				throw new Error(`Failed query: ${res.status}`);
 			}
@@ -58,9 +58,9 @@
 <hr class="my-4 border border-dashed border-gray-400" />
 
 <ul class="list-inside list-disc space-y-2">
-	{#each entries as entry}
+	{#each entries as entry (entry.id)}
 		<li>
-			<a href={'/entry/' + entry.id} class="text-blue-700 hover:underline">{entry.id}</a>:
+			<a href={"/entry/" + entry.id} class="text-blue-700 hover:underline">{entry.id}</a>:
 			<span class="font-mix">{entry.headword_persian}</span>
 		</li>
 	{/each}
