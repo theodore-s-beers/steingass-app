@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { type Entry } from '$lib/utils';
-	import { marked } from 'marked';
+	import { afterNavigate } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { type Entry } from "$lib/utils";
+	import { marked } from "marked";
 
 	$: id = $page.params.slug;
 	$: prev = Number(id) - 1;
@@ -14,7 +14,7 @@
 
 	async function fetchEntry(id: string): Promise<Entry | null> {
 		try {
-			const res = await fetch('/api/entry?' + new URLSearchParams({ id }));
+			const res = await fetch("/api/entry?" + new URLSearchParams({ id }));
 			if (!res.ok) {
 				throw new Error(`Failed query: ${res.status}`);
 			}
@@ -57,9 +57,9 @@
 	>
 		<div class="font-semibold">Page</div>
 		<div>
-			<a href={'/page/' + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
+			<a href={"/page/" + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
 			(<a
-				href={`/page-img/${entry.page.toString().padStart(4, '0')}.jpg`}
+				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
 				target="_blank"
 				class="text-blue-700 hover:underline">Page image</a
 			>)

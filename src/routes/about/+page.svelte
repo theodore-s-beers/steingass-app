@@ -1,10 +1,10 @@
 <script lang="ts">
-	const title = 'Steingass Persian-English Dictionary – About';
+	const title = "Steingass Persian-English Dictionary – About";
 </script>
 
 <svelte:head>
 	<title>{title}</title>
-	<meta property="og:url" content={`https://steingass.theobeers.com/about`} />
+	<meta property="og:url" content="https://steingass.theobeers.com/about" />
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 

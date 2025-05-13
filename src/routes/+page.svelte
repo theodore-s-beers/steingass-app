@@ -1,28 +1,28 @@
 <script lang="ts">
-	import { type Entry, fetchHints, normalize } from '$lib/utils';
-	import { marked } from 'marked';
-	import { onMount } from 'svelte';
+	import { type Entry, fetchHints, normalize } from "$lib/utils";
+	import { marked } from "marked";
+	import { onMount } from "svelte";
 
-	const title = 'Steingass Persian-English Dictionary';
+	const title = "Steingass Persian-English Dictionary";
 
-	let field = 'headword_persian';
-	let matchType = 'exact';
-	let term = '';
+	let field = "headword_persian";
+	let matchType = "exact";
+	let term = "";
 
-	$: if (matchType === 'exact' && field !== 'headword_persian') matchType = 'token';
+	$: if (matchType === "exact" && field !== "headword_persian") matchType = "token";
 
 	let loading = false;
 	let results: Entry[] = [];
 
 	let hints: string[] = [];
-	$: if (field !== 'headword_persian' || matchType !== 'exact') hints = [];
+	$: if (field !== "headword_persian" || matchType !== "exact") hints = [];
 
 	let debounce: number;
 
 	function handleInput() {
 		clearTimeout(debounce);
 
-		if (field !== 'headword_persian' || matchType !== 'exact') {
+		if (field !== "headword_persian" || matchType !== "exact") {
 			return;
 		}
 
@@ -39,13 +39,13 @@
 
 		term = normalize(term);
 
-		localStorage.setItem('steingassFieldV1', field);
-		localStorage.setItem('steingassVerbV1', matchType);
-		localStorage.setItem('steingassTermV1', term);
+		localStorage.setItem("steingassFieldV1", field);
+		localStorage.setItem("steingassVerbV1", matchType);
+		localStorage.setItem("steingassTermV1", term);
 
 		try {
 			const res = await fetch(
-				'/api/entries?' + new URLSearchParams({ field, 'match-type': matchType, term })
+				"/api/entries?" + new URLSearchParams({ field, "match-type": matchType, term }),
 			);
 			if (!res.ok) {
 				throw new Error(`Failed query: ${res.status}`);
@@ -61,17 +61,17 @@
 	}
 
 	function clear() {
-		term = '';
-		localStorage.removeItem('steingassTermV1');
+		term = "";
+		localStorage.removeItem("steingassTermV1");
 		results = [];
 		hints = [];
 		loading = false;
 	}
 
 	onMount(() => {
-		field = localStorage.getItem('steingassFieldV1') || field;
-		matchType = localStorage.getItem('steingassVerbV1') || matchType;
-		term = localStorage.getItem('steingassTermV1') || term;
+		field = localStorage.getItem("steingassFieldV1") || field;
+		matchType = localStorage.getItem("steingassVerbV1") || matchType;
+		term = localStorage.getItem("steingassTermV1") || term;
 
 		if (term) query();
 	});
@@ -104,7 +104,7 @@
 <div class="mb-4 flex items-center">
 	<label for="match-type" class="mr-3 font-semibold">Match type:</label>
 	<select id="match-type" class="rounded border p-2" bind:value={matchType}>
-		{#if field === 'headword_persian'}
+		{#if field === "headword_persian"}
 			<option value="exact">Exact (with suggestions)</option>
 		{/if}
 		<option value="token">Contains full word</option>
@@ -118,7 +118,7 @@
 		type="text"
 		id="term"
 		list="suggestions"
-		class="w-48 rounded border px-2.5 py-2 font-mix leading-relaxed"
+		class="font-mix w-48 rounded border px-2.5 py-2 leading-relaxed"
 		autocomplete="off"
 		autocapitalize="none"
 		autocorrect="off"
@@ -126,16 +126,16 @@
 		bind:value={term}
 		on:input={handleInput}
 		on:keydown={(e) => {
-			if (e.key === 'Enter') {
+			if (e.key === "Enter") {
 				e.currentTarget.blur();
 				query();
 			}
 		}}
 	/>
-	{#if field === 'headword_persian' && matchType === 'exact'}
+	{#if field === "headword_persian" && matchType === "exact"}
 		<datalist id="suggestions">
-			{#each hints as hint}
-				<option value={hint} />
+			{#each hints as hint, i (i)}
+				<option value={hint}></option>
 			{/each}
 		</datalist>
 	{/if}
@@ -160,8 +160,8 @@
 	{#if results.length > 0}
 		<p>
 			<a
-				href={'/api/entries?' +
-					new URLSearchParams({ field, 'match-type': matchType, term, 'plain-text': 'true' })}
+				href={"/api/entries?" +
+					new URLSearchParams({ field, "match-type": matchType, term, "plain-text": "true" })}
 				target="_blank"
 				class="text-blue-700 hover:underline">API link for this query</a
 			>
@@ -169,18 +169,18 @@
 	{/if}
 {/if}
 
-{#each results as entry}
+{#each results as entry (entry.id)}
 	<div
 		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
 	>
 		<div class="font-semibold">ID</div>
-		<div><a href={'/entry/' + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
+		<div><a href={"/entry/" + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
 
 		<div class="font-semibold">Page</div>
 		<div>
-			<a href={'/page/' + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
+			<a href={"/page/" + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
 			(<a
-				href={`/page-img/${entry.page.toString().padStart(4, '0')}.jpg`}
+				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
 				target="_blank"
 				class="text-blue-700 hover:underline">Page image</a
 			>)

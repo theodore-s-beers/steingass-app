@@ -16,7 +16,7 @@ export interface Entry {
 
 export async function fetchHints(term: string): Promise<string[]> {
 	try {
-		const res = await fetch('/api/hints?' + new URLSearchParams({ term }));
+		const res = await fetch("/api/hints?" + new URLSearchParams({ term }));
 		if (!res.ok) {
 			throw new Error(`Failed query: ${res.status}`);
 		}
@@ -32,19 +32,19 @@ export async function fetchHints(term: string): Promise<string[]> {
 
 export function normalize(input: string): string {
 	const reK = /\u0643/gu;
-	const perK = '\u06A9';
+	const perK = "\u06A9";
 
 	const reY = /[\u0649\u064A]/gu;
-	const perY = '\u06CC';
+	const perY = "\u06CC";
 
 	const reApos = /\u0027/gu;
-	const rQuo = '\u2019';
+	const rQuo = "\u2019";
 
 	return input.replaceAll(reK, perK).replaceAll(reY, perY).replaceAll(reApos, rQuo);
 }
 
 export function toPlain(input: Entry[] | AbjadEntry[]): string {
-	let output = '';
+	let output = "";
 
 	for (let i = 0; i < input.length; i++) {
 		for (const [key, value] of Object.entries(input[i])) {
@@ -52,7 +52,7 @@ export function toPlain(input: Entry[] | AbjadEntry[]): string {
 		}
 
 		if (i < input.length - 1) {
-			output += '\n';
+			output += "\n";
 		}
 	}
 

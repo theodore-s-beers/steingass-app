@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { type Entry } from '$lib/utils';
-	import { marked } from 'marked';
+	import { afterNavigate } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { type Entry } from "$lib/utils";
+	import { marked } from "marked";
 
 	$: pageNumber = $page.params.slug;
-	$: padded = pageNumber.padStart(4, '0');
+	$: padded = pageNumber.padStart(4, "0");
 	$: prev = Number(pageNumber) - 1;
 	$: next = Number(pageNumber) + 1;
 	$: title = `Steingass – Page ${pageNumber}`;
@@ -16,7 +16,7 @@
 
 	async function fetchPage(pageNumber: string): Promise<Entry[]> {
 		try {
-			const res = await fetch('/api/page?' + new URLSearchParams({ 'page-number': pageNumber }));
+			const res = await fetch("/api/page?" + new URLSearchParams({ "page-number": pageNumber }));
 			if (!res.ok) {
 				throw new Error(`Failed query: ${res.status}`);
 			}
@@ -64,12 +64,12 @@
 
 <hr class="my-4 border border-dashed border-gray-400" />
 
-{#each entries as entry}
+{#each entries as entry (entry.id)}
 	<div
 		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
 	>
 		<div class="font-semibold">ID</div>
-		<div><a href={'/entry/' + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
+		<div><a href={"/entry/" + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
 
 		<div class="font-semibold">Etym.</div>
 		<div>{entry.lang}</div>
