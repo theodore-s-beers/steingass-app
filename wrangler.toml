@@ -1,7 +1,13 @@
 name = "steingass"
 compatibility_date = "2025-05-13"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[vars]
+NODE_VERSION = "22"
+PNPM_VERSION = "10"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "steingass-v1"
-database_id = "15bf1520-52e0-4f00-ae6a-0354fad9ccc5"
+database_name = "steingass-v2"
+database_id = "7398c42d-b1b5-452d-9091-c5466bb6b76d"
