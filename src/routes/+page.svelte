@@ -93,7 +93,7 @@
 
 <div class="mb-4 flex items-center">
 	<label for="field" class="mr-3 font-semibold">Field:</label>
-	<select id="field" class="rounded border p-2" bind:value={field}>
+	<select id="field" class="rounded border border-gray-500 p-2" bind:value={field}>
 		<option value="headword_persian">Headword (Persian)</option>
 		<option value="headword_full">Headword (full)</option>
 		<option value="definitions">Definition(s)</option>
@@ -103,7 +103,7 @@
 
 <div class="mb-4 flex items-center">
 	<label for="match-type" class="mr-3 font-semibold">Match type:</label>
-	<select id="match-type" class="rounded border p-2" bind:value={matchType}>
+	<select id="match-type" class="rounded border border-gray-500 p-2" bind:value={matchType}>
 		{#if field === "headword_persian"}
 			<option value="exact">Exact (with suggestions)</option>
 		{/if}
@@ -118,7 +118,7 @@
 		type="text"
 		id="term"
 		list="suggestions"
-		class="font-mix w-48 rounded border px-2.5 py-2 leading-relaxed"
+		class="font-mix w-48 rounded border border-gray-500 px-2.5 py-2 leading-relaxed"
 		autocomplete="off"
 		autocapitalize="none"
 		autocorrect="off"
