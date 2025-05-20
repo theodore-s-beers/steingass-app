@@ -142,8 +142,12 @@
 </div>
 
 <div class="flex">
-	<button on:click={query} class="mr-4 rounded bg-blue-700 px-6 py-2 text-white">Query</button>
-	<button on:click={clear} class="rounded bg-green-700 px-6 py-2 text-white">Clear</button>
+	<button on:click={query} class="mr-4 cursor-pointer rounded bg-blue-700 px-6 py-2 text-white">
+		Query
+	</button>
+	<button on:click={clear} class="cursor-pointer rounded bg-green-700 px-6 py-2 text-white">
+		Clear
+	</button>
 </div>
 
 <hr class="my-4 border border-dashed border-gray-400" />
