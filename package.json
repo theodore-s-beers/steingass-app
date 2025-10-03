@@ -45,6 +45,9 @@
 			"esbuild",
 			"sharp",
 			"workerd"
-		]
+		],
+		"overrides": {
+			"cookie": "^1.0.2"
+		}
 	}
 }
