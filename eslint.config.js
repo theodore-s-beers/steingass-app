@@ -32,6 +32,9 @@ export default ts.config(
 				svelteConfig,
 			},
 		},
-		rules: { "svelte/no-at-html-tags": "warn" },
+		rules: {
+			"svelte/no-at-html-tags": "warn",
+			"svelte/no-navigation-without-resolve": "warn",
+		},
 	},
 );

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	const title = "Steingass Persian-English Dictionary – About";
 </script>
 
@@ -9,7 +10,7 @@
 </svelte:head>
 
 <div class="mb-3 flex justify-center">
-	<a href="/" class="text-blue-700 hover:underline">Home</a>
+	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 </div>
 
 <h1 class="mb-6 text-4xl">{title}</h1>

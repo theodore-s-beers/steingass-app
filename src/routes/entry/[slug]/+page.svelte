@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { afterNavigate } from "$app/navigation";
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { type Entry } from "$lib/utils";
 	import { marked } from "marked";
+	import { resolve } from "$app/paths";
 
-	$: id = $page.params.slug;
-	$: prev = Number(id) - 1;
-	$: next = Number(id) + 1;
-	$: title = `Steingass – Entry ${id}`;
+	let id = $derived(page.params.slug ?? "");
+	let prev = $derived(Number(id) - 1);
+	let next = $derived(Number(id) + 1);
+	let title = $derived(`Steingass – Entry ${id}`);
 
-	let loading = true;
-	let entry: Entry | null = null;
+	let loading = $state(true);
+	let entry: Entry | null = $state(null);
 
 	async function fetchEntry(id: string): Promise<Entry | null> {
 		try {
@@ -43,7 +44,7 @@
 
 <div class="mb-3 flex justify-between">
 	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. entry</a>
-	<a href="/" class="text-blue-700 hover:underline">Home</a>
+	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 	<a href={String(next)} class="text-blue-700 hover:underline">Next entry</a>
 </div>
 

@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { afterNavigate } from "$app/navigation";
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { type Entry } from "$lib/utils";
 	import { marked } from "marked";
+	import { resolve } from "$app/paths";
 
-	$: pageNumber = $page.params.slug;
-	$: padded = pageNumber.padStart(4, "0");
-	$: prev = Number(pageNumber) - 1;
-	$: next = Number(pageNumber) + 1;
-	$: title = `Steingass – Page ${pageNumber}`;
+	let pageNumber = $derived(page.params.slug ?? "");
+	let padded = $derived(pageNumber.padStart(4, "0"));
+	let prev = $derived(Number(pageNumber) - 1);
+	let next = $derived(Number(pageNumber) + 1);
+	let title = $derived(`Steingass – Page ${pageNumber}`);
 
-	let loading = true;
-	let entries: Entry[] = [];
-	$: count = entries.length;
+	let loading = $state(true);
+	let entries: Entry[] = $state([]);
+	let count = $derived(entries.length);
 
 	async function fetchPage(pageNumber: string): Promise<Entry[]> {
 		try {
@@ -45,7 +46,7 @@
 
 <div class="mb-3 flex justify-between">
 	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. p.</a>
-	<a href="/" class="text-blue-700 hover:underline">Home</a>
+	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 	<a href={String(next)} class="text-blue-700 hover:underline">Next p.</a>
 </div>
 
@@ -98,7 +99,7 @@
 
 	<div class="flex justify-between">
 		<a href={String(prev)} class="text-blue-700 hover:underline">Prev. p.</a>
-		<a href="/" class="text-blue-700 hover:underline">Home</a>
+		<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 		<a href={String(next)} class="text-blue-700 hover:underline">Next p.</a>
 	</div>
 {/if}

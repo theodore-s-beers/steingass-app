@@ -2,6 +2,7 @@
 	import { type Entry, fetchHints, normalize } from "$lib/utils";
 	import { marked } from "marked";
 	import { onMount } from "svelte";
+	import { resolve } from "$app/paths";
 
 	const title = "Steingass Persian-English Dictionary";
 
@@ -84,7 +85,7 @@
 </svelte:head>
 
 <div class="mb-3 flex justify-end">
-	<a href="/about" class="text-blue-700 hover:underline">About</a>
+	<a href={resolve("/about")} class="text-blue-700 hover:underline">About</a>
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>
@@ -118,7 +119,7 @@
 		type="text"
 		id="term"
 		list="suggestions"
-		class="font-mix w-48 rounded border border-gray-500 px-2.5 py-2 leading-relaxed"
+		class="w-48 rounded border border-gray-500 px-2.5 py-2 font-mix leading-relaxed"
 		autocomplete="off"
 		autocapitalize="none"
 		autocorrect="off"

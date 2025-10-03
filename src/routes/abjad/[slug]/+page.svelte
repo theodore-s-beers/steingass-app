@@ -3,7 +3,7 @@
 	import { page } from "$app/state";
 	import { type AbjadEntry } from "$lib/utils";
 
-	let abjadValue = $derived(page.params.slug);
+	let abjadValue = $derived(page.params.slug ?? "");
 	let prev = $derived(Number(abjadValue) - 1);
 	let next = $derived(Number(abjadValue) + 1);
 	let title = $derived(`Steingass – Abjad value ${abjadValue}`);
@@ -43,9 +43,9 @@
 </svelte:head>
 
 <div class="mb-3 flex justify-between">
-	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. val.</a>
+	<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
 	<a href="/" class="text-blue-700 hover:underline">Home</a>
-	<a href={String(next)} class="text-blue-700 hover:underline">Next val.</a>
+	<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>
@@ -71,8 +71,8 @@
 	<hr class="my-4 border border-dashed border-gray-400" />
 
 	<div class="flex justify-between">
-		<a href={String(prev)} class="text-blue-700 hover:underline">Prev. val.</a>
+		<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
 		<a href="/" class="text-blue-700 hover:underline">Home</a>
-		<a href={String(next)} class="text-blue-700 hover:underline">Next val.</a>
+		<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
 	</div>
 {/if}
