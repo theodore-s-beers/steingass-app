@@ -2,6 +2,7 @@
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
 	import { type AbjadEntry } from "$lib/utils";
+	import { resolve } from "$app/paths";
 
 	let abjadValue = $derived(page.params.slug ?? "");
 	let prev = $derived(Number(abjadValue) - 1);
@@ -44,7 +45,7 @@
 
 <div class="mb-3 flex justify-between">
 	<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
-	<a href="/" class="text-blue-700 hover:underline">Home</a>
+	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 	<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
 </div>
 
@@ -61,7 +62,12 @@
 <ul class="list-inside list-disc space-y-2">
 	{#each entries as entry (entry.id)}
 		<li>
-			<a href={"/entry/" + entry.id} class="text-blue-700 hover:underline">{entry.id}</a>:
+			<a
+				href={resolve("/entry/[slug]", { slug: entry.id.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.id}
+			</a>:
 			<span class="font-mix">{entry.headword_persian}</span>
 		</li>
 	{/each}
@@ -72,7 +78,7 @@
 
 	<div class="flex justify-between">
 		<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
-		<a href="/" class="text-blue-700 hover:underline">Home</a>
+		<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
 		<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
 	</div>
 {/if}

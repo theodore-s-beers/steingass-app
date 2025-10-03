@@ -43,9 +43,9 @@
 </svelte:head>
 
 <div class="mb-3 flex justify-between">
-	<a href={String(prev)} class="text-blue-700 hover:underline">Prev. entry</a>
+	<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. entry</a>
 	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
-	<a href={String(next)} class="text-blue-700 hover:underline">Next entry</a>
+	<a href={next.toString()} class="text-blue-700 hover:underline">Next entry</a>
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>
@@ -58,7 +58,12 @@
 	>
 		<div class="font-semibold">Page</div>
 		<div>
-			<a href={"/page/" + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
+			<a
+				href={resolve("/page/[slug]", { slug: entry.page.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.page}
+			</a>
 			(<a
 				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
 				target="_blank"
@@ -77,7 +82,12 @@
 
 		<div class="font-semibold">Abjad</div>
 		<div>
-			<a href={`/abjad/${entry.abjad}`} class="text-blue-700 hover:underline">{entry.abjad}</a>
+			<a
+				href={resolve("/abjad/[slug]", { slug: entry.abjad.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.abjad}
+			</a>
 		</div>
 
 		<div class="font-semibold">HW (Lat.)</div>

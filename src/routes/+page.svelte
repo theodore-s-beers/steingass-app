@@ -6,17 +6,24 @@
 
 	const title = "Steingass Persian-English Dictionary";
 
-	let field = "headword_persian";
-	let matchType = "exact";
-	let term = "";
+	let field = $state("headword_persian");
+	let matchType = $state("exact");
+	let term = $state("");
 
-	$: if (matchType === "exact" && field !== "headword_persian") matchType = "token";
+	let loading = $state(false);
+	let results: Entry[] = $state([]);
 
-	let loading = false;
-	let results: Entry[] = [];
+	let hints: string[] = $state([]);
 
-	let hints: string[] = [];
-	$: if (field !== "headword_persian" || matchType !== "exact") hints = [];
+	function reconcile() {
+		if (field !== "headword_persian" && matchType === "exact") {
+			matchType = "token";
+		}
+
+		if (field !== "headword_persian" || matchType !== "exact") {
+			hints = [];
+		}
+	}
 
 	let debounce: number;
 
@@ -94,7 +101,12 @@
 
 <div class="mb-4 flex items-center">
 	<label for="field" class="mr-3 font-semibold">Field:</label>
-	<select id="field" class="rounded border border-gray-500 p-2" bind:value={field}>
+	<select
+		id="field"
+		class="rounded border border-gray-500 p-2"
+		bind:value={field}
+		onchange={reconcile}
+	>
 		<option value="headword_persian">Headword (Persian)</option>
 		<option value="headword_full">Headword (full)</option>
 		<option value="definitions">Definition(s)</option>
@@ -104,7 +116,12 @@
 
 <div class="mb-4 flex items-center">
 	<label for="match-type" class="mr-3 font-semibold">Match type:</label>
-	<select id="match-type" class="rounded border border-gray-500 p-2" bind:value={matchType}>
+	<select
+		id="match-type"
+		class="rounded border border-gray-500 p-2"
+		bind:value={matchType}
+		onchange={reconcile}
+	>
 		{#if field === "headword_persian"}
 			<option value="exact">Exact (with suggestions)</option>
 		{/if}
@@ -125,8 +142,8 @@
 		autocorrect="off"
 		spellcheck="false"
 		bind:value={term}
-		on:input={handleInput}
-		on:keydown={(e) => {
+		oninput={handleInput}
+		onkeydown={(e) => {
 			if (e.key === "Enter") {
 				e.currentTarget.blur();
 				query();
@@ -143,10 +160,10 @@
 </div>
 
 <div class="flex">
-	<button on:click={query} class="mr-4 cursor-pointer rounded bg-blue-700 px-6 py-2 text-white">
+	<button onclick={query} class="mr-4 cursor-pointer rounded bg-blue-700 px-6 py-2 text-white">
 		Query
 	</button>
-	<button on:click={clear} class="cursor-pointer rounded bg-green-700 px-6 py-2 text-white">
+	<button onclick={clear} class="cursor-pointer rounded bg-green-700 px-6 py-2 text-white">
 		Clear
 	</button>
 </div>
@@ -179,11 +196,23 @@
 		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
 	>
 		<div class="font-semibold">ID</div>
-		<div><a href={"/entry/" + entry.id} class="text-blue-700 hover:underline">{entry.id}</a></div>
+		<div>
+			<a
+				href={resolve("/entry/[slug]", { slug: entry.id.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.id}
+			</a>
+		</div>
 
 		<div class="font-semibold">Page</div>
 		<div>
-			<a href={"/page/" + entry.page} class="text-blue-700 hover:underline">{entry.page}</a>
+			<a
+				href={resolve("/page/[slug]", { slug: entry.page.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.page}
+			</a>
 			(<a
 				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
 				target="_blank"
@@ -202,7 +231,12 @@
 
 		<div class="font-semibold">Abjad</div>
 		<div>
-			<a href={`/abjad/${entry.abjad}`} class="text-blue-700 hover:underline">{entry.abjad}</a>
+			<a
+				href={resolve("/abjad/[slug]", { slug: entry.abjad.toString() })}
+				class="text-blue-700 hover:underline"
+			>
+				{entry.abjad}
+			</a>
 		</div>
 
 		<div class="font-semibold">HW (Lat.)</div>
