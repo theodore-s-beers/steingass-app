@@ -3,7 +3,7 @@
 	import { page } from "$app/state";
 	import { type Entry } from "$lib/utils";
 	import { marked } from "marked";
-	import { resolve } from "$app/paths";
+	import { asset, resolve } from "$app/paths";
 
 	let pageNumber = $derived(page.params.slug ?? "");
 	let padded = $derived(pageNumber.padStart(4, "0"));
@@ -56,9 +56,13 @@
 	<p>Loading…</p>
 {:else}
 	<p>
-		<a href={`/page-img/${padded}.jpg`} target="_blank" class="text-blue-700 hover:underline"
-			>Page image</a
+		<a
+			href={asset(`/page-img/${padded}.jpg`)}
+			target="_blank"
+			class="text-blue-700 hover:underline"
 		>
+			Page image
+		</a>
 	</p>
 	<p><span class="font-semibold">Entries:</span> {count}</p>
 {/if}

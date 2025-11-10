@@ -2,7 +2,7 @@
 	import { type Entry, fetchHints, normalize } from "$lib/utils";
 	import { marked } from "marked";
 	import { onMount } from "svelte";
-	import { resolve } from "$app/paths";
+	import { asset, resolve } from "$app/paths";
 
 	const title = "Steingass Persian-English Dictionary";
 
@@ -185,8 +185,10 @@
 				href={"/api/entries?" +
 					new URLSearchParams({ field, "match-type": matchType, term, "plain-text": "true" })}
 				target="_blank"
-				class="text-blue-700 hover:underline">API link for this query</a
+				class="text-blue-700 hover:underline"
 			>
+				API link for this query
+			</a>
 		</p>
 	{/if}
 {/if}
@@ -214,10 +216,12 @@
 				{entry.page}
 			</a>
 			(<a
-				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
+				href={asset(`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`)}
 				target="_blank"
-				class="text-blue-700 hover:underline">Page image</a
-			>)
+				class="text-blue-700 hover:underline"
+			>
+				Page image
+			</a>)
 		</div>
 
 		<div class="font-semibold">Etym.</div>

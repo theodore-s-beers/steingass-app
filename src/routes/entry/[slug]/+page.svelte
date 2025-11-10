@@ -3,7 +3,7 @@
 	import { page } from "$app/state";
 	import { type Entry } from "$lib/utils";
 	import { marked } from "marked";
-	import { resolve } from "$app/paths";
+	import { asset, resolve } from "$app/paths";
 
 	let id = $derived(page.params.slug ?? "");
 	let prev = $derived(Number(id) - 1);
@@ -65,10 +65,12 @@
 				{entry.page}
 			</a>
 			(<a
-				href={`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`}
+				href={asset(`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`)}
 				target="_blank"
-				class="text-blue-700 hover:underline">Page image</a
-			>)
+				class="text-blue-700 hover:underline"
+			>
+				Page image
+			</a>)
 		</div>
 
 		<div class="font-semibold">Etym.</div>
