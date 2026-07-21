@@ -4,7 +4,7 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [vars]
-NODE_VERSION = "24"
+NODE_VERSION = "24.18"
 PNPM_VERSION = "11"
 
 [[d1_databases]]
