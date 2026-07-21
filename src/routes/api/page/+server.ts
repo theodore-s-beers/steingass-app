@@ -1,6 +1,7 @@
 import { type Entry } from "$lib/utils";
+import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }) {
+export async function GET({ platform, url }: RequestEvent) {
 	const pageNumber = url.searchParams.get("page-number");
 	if (!pageNumber) {
 		return new Response("Page number not provided", { status: 400 });

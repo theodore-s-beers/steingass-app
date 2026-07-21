@@ -1,6 +1,7 @@
 import { type Entry } from "$lib/utils";
+import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }) {
+export async function GET({ platform, url }: RequestEvent) {
 	const id = url.searchParams.get("id");
 	if (!id) {
 		return new Response("Entry ID not provided", { status: 400 });

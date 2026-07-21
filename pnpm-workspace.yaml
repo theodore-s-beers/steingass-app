@@ -4,3 +4,5 @@ allowBuilds:
   workerd: true
 overrides:
   cookie@<0.7.0: ^0.7.0
+patchedDependencies:
+  svelte-check@4.7.3: patches/svelte-check@4.7.3.patch

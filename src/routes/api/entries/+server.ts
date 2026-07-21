@@ -1,10 +1,11 @@
 import { type Entry, toPlain } from "$lib/utils";
+import type { RequestEvent } from "./$types";
 
 interface IdEntry {
 	rowid: number;
 }
 
-export async function GET({ platform, url }) {
+export async function GET({ platform, url }: RequestEvent) {
 	// Get query parameters
 	const field = url.searchParams.get("field");
 	const matchType = url.searchParams.get("match-type");

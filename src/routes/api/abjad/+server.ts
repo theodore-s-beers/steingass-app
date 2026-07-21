@@ -1,6 +1,7 @@
 import { type AbjadEntry, toPlain } from "$lib/utils";
+import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }) {
+export async function GET({ platform, url }: RequestEvent) {
 	const valueParam = url.searchParams.get("value");
 	const plainText = url.searchParams.get("plain-text");
 

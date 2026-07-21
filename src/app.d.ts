@@ -1,3 +1,5 @@
+import "../worker-configuration.d.ts";
+
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -10,7 +12,7 @@ declare global {
 			caches: CacheStorage & { default: Cache };
 			cf: CfProperties;
 			ctx: ExecutionContext;
-			env: { DB: D1Database };
+			env: Env;
 		}
 	}
 }

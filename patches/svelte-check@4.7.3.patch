@@ -1,0 +1,31 @@
+diff --git a/dist/src/index.js b/dist/src/index.js
+index a2e8d95a456f37fda1adf30d6e5db18abfb8f76a..141677dc79f0ade9f45bb60b3f99eb6b0240cfbe 100644
+--- a/dist/src/index.js
++++ b/dist/src/index.js
+@@ -129037,9 +129037,14 @@ async function findFiles(workspacePath, filePathsToIgnore, filter) {
+ }
+ 
+ function tryParseTsGoVersion(tsconfigPath) {
+-    // TODO: Most likely it'll eventually be released under the 'typescript' package.
+-    // When it happened, check where the nightly versions are released and decide which package to prioritize.
+-    return tryParsePkg(tsconfigPath, '@typescript/native-preview');
++    const pkg = tryParsePkg(tsconfigPath, '@typescript/native') ??
++        tryParsePkg(tsconfigPath, '@typescript/native-preview');
++    if (pkg &&
++        (pkg.pkgJsonName === 'typescript' || pkg.pkgJsonName === '@typescript/native-preview') &&
++        pkg.major >= 7) {
++        return pkg;
++    }
++    return null;
+ }
+ function tryParsePkg(tsconfigPath, name) {
+     try {
+@@ -129441,7 +129446,7 @@ function getTsGoBinPath(tsconfigPath) {
+     if (!pkg) {
+         throw new Error('--tsgo requires @typescript/native-preview to be installed in the workspace');
+     }
+-    const binPathRelative = pkg.bin[pkg.moduleName === '@typescript/native-preview' ? 'tsgo' : 'tsc'];
++    const binPathRelative = pkg.bin[pkg.pkgJsonName === '@typescript/native-preview' ? 'tsgo' : 'tsc'];
+     return binPathRelative ? path__namespace.join(path__namespace.dirname(pkg.path), binPathRelative) : undefined;
+ }
+ /**

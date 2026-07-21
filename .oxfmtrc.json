@@ -1,4 +1,10 @@
 {
 	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"ignorePatterns": ["/static/page-img/*.jpg", "/worker-configuration.d.ts"],
+	"printWidth": 100,
+	"sortTailwindcss": {
+		"stylesheet": "./src/app.css"
+	},
+	"svelte": true,
 	"useTabs": true
 }

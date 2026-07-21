@@ -1,8 +1,10 @@
+import type { RequestEvent } from "./$types";
+
 interface HeadwordEntry {
 	headword_persian: string;
 }
 
-export async function GET({ platform, url }) {
+export async function GET({ platform, url }: RequestEvent) {
 	const term = url.searchParams.get("term");
 	if (!term) {
 		return new Response("No search term provided", { status: 400 });
