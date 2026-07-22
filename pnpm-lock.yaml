@@ -9,7 +9,7 @@ overrides:
   sharp@<0.35.3: ^0.35.3
 
 patchedDependencies:
-  svelte-check@4.7.3: 00aafb1da3627f80d41f5f2b7c7d17ca24c8d05926870f544d777c707507a04b
+  svelte-check@4.7.3: 19869e868709367fda4a12f716a572d5d73691d534e1e4bddb7fd991579c842e
 
 importers:
 
@@ -48,7 +48,7 @@ importers:
         version: 5.56.7
       svelte-check:
         specifier: ^4.7.3
-        version: 4.7.3(patch_hash=00aafb1da3627f80d41f5f2b7c7d17ca24c8d05926870f544d777c707507a04b)(picomatch@4.0.5)(svelte@5.56.7)(typescript@6.0.3)
+        version: 4.7.3(patch_hash=19869e868709367fda4a12f716a572d5d73691d534e1e4bddb7fd991579c842e)(picomatch@4.0.5)(svelte@5.56.7)(typescript@6.0.3)
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -2598,7 +2598,7 @@ snapshots:
 
   supports-color@10.2.2: {}
 
-  svelte-check@4.7.3(patch_hash=00aafb1da3627f80d41f5f2b7c7d17ca24c8d05926870f544d777c707507a04b)(picomatch@4.0.5)(svelte@5.56.7)(typescript@6.0.3):
+  svelte-check@4.7.3(patch_hash=19869e868709367fda4a12f716a572d5d73691d534e1e4bddb7fd991579c842e)(picomatch@4.0.5)(svelte@5.56.7)(typescript@6.0.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@sveltejs/load-config': 0.2.0
