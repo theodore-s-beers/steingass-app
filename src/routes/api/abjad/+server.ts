@@ -1,4 +1,5 @@
 import { type AbjadEntry, toPlain } from "$lib/utils";
+import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
 export async function GET({ platform, url }: RequestEvent) {
@@ -26,5 +27,5 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response(toPlain(results));
 	}
 
-	return new Response(JSON.stringify(results));
+	return json(results);
 }
