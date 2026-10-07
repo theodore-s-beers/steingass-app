@@ -1,3 +1,4 @@
+import { toFtsQuery } from "#lib/utils.ts";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
@@ -11,7 +12,10 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("No search term provided", { status: 400 });
 	}
 
-	const termPrefix = `${term}*`;
+	const termPrefix = toFtsQuery(term, true);
+	if (!termPrefix) {
+		return new Response("No search term provided", { status: 400 });
+	}
 	const sql = "SELECT headword_persian FROM ft_per WHERE ft_per MATCH ? LIMIT 20";
 	const stmt = platform!.env.DB.prepare(sql).bind(termPrefix);
 

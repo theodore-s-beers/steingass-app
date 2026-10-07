@@ -43,6 +43,15 @@ export function normalize(input: string): string {
 	return input.replaceAll(reK, perK).replaceAll(reY, perY).replaceAll(reApos, rQuo);
 }
 
+export function toFtsQuery(input: string, prefix: boolean): string {
+	// Quote each word so user input cannot become FTS syntax. NUL terminates FTS input.
+	return input
+		.split(/[\s\0]+/u)
+		.filter(Boolean)
+		.map((word) => `"${word.replaceAll('"', '""')}"${prefix ? "*" : ""}`)
+		.join(" AND ");
+}
+
 export function toPlain(input: Entry[] | AbjadEntry[]): string {
 	let output = "";
 

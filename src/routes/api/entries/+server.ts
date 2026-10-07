@@ -1,4 +1,4 @@
-import { type Entry, toPlain } from "#lib/utils.ts";
+import { type Entry, toFtsQuery, toPlain } from "#lib/utils.ts";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
@@ -41,7 +41,10 @@ export async function GET({ platform, url }: RequestEvent) {
 
 	// Prepare for FTS query
 	const table = parseField(field);
-	const termParsed = matchType === "prefix" ? `${term}*` : term;
+	const termParsed = toFtsQuery(term, matchType === "prefix");
+	if (!termParsed) {
+		return new Response("No search term provided", { status: 400 });
+	}
 
 	// Limit to 50 already in the first query
 	const ftSql = `SELECT ROWID FROM ${table} WHERE ${table} MATCH ? LIMIT 50`;
