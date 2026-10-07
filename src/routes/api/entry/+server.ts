@@ -1,3 +1,4 @@
+import { MAX_ENTRY_ID } from "#lib/constants.ts";
 import { type Entry } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
@@ -8,7 +9,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const parsed = Number(id);
-	if (!Number.isInteger(parsed) || parsed < 1 || parsed > 69_888) {
+	if (!Number.isInteger(parsed) || parsed < 1 || parsed > MAX_ENTRY_ID) {
 		return new Response("Invalid entry ID", { status: 400 });
 	}
 

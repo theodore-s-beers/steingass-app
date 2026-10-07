@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { MAX_ENTRY_ID } from "#lib/constants.ts";
 	import EntryCard from "#lib/EntryCard.svelte";
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
@@ -46,10 +47,20 @@
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 
-<div class="mb-3 flex justify-between">
-	<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. entry</a>
-	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
-	<a href={next.toString()} class="text-blue-700 hover:underline">Next entry</a>
+<div class="mb-3 grid grid-cols-3">
+	{#if prev >= 1}
+		<a href={prev.toString()} class="col-start-1 justify-self-start text-blue-700 hover:underline"
+			>Prev. entry</a
+		>
+	{/if}
+	<a href={resolve("/")} class="col-start-2 justify-self-center text-blue-700 hover:underline"
+		>Home</a
+	>
+	{#if next <= MAX_ENTRY_ID}
+		<a href={next.toString()} class="col-start-3 justify-self-end text-blue-700 hover:underline"
+			>Next entry</a
+		>
+	{/if}
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>

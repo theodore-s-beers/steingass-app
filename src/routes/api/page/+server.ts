@@ -1,3 +1,4 @@
+import { MAX_PAGE_NUMBER } from "#lib/constants.ts";
 import { type Entry } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
@@ -8,7 +9,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const parsed = Number(pageNumber);
-	if (!Number.isInteger(parsed) || parsed < 1 || parsed > 1_539) {
+	if (!Number.isInteger(parsed) || parsed < 1 || parsed > MAX_PAGE_NUMBER) {
 		return new Response("Invalid page number", { status: 400 });
 	}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { MAX_ABJAD_VALUE } from "#lib/constants.ts";
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
 	import { type AbjadEntry } from "#lib/utils.ts";
@@ -47,10 +48,20 @@
 	<meta name="twitter:title" content={title} />
 </svelte:head>
 
-<div class="mb-3 flex justify-between">
-	<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
-	<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
-	<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
+<div class="mb-3 grid grid-cols-3">
+	{#if prev >= 1}
+		<a href={prev.toString()} class="col-start-1 justify-self-start text-blue-700 hover:underline"
+			>Prev. val.</a
+		>
+	{/if}
+	<a href={resolve("/")} class="col-start-2 justify-self-center text-blue-700 hover:underline"
+		>Home</a
+	>
+	{#if next <= MAX_ABJAD_VALUE}
+		<a href={next.toString()} class="col-start-3 justify-self-end text-blue-700 hover:underline"
+			>Next val.</a
+		>
+	{/if}
 </div>
 
 <h1 class="mb-5 text-4xl">{title}</h1>
@@ -80,9 +91,19 @@
 {#if entries.length > 20}
 	<hr class="my-4 border border-dashed border-gray-400" />
 
-	<div class="flex justify-between">
-		<a href={prev.toString()} class="text-blue-700 hover:underline">Prev. val.</a>
-		<a href={resolve("/")} class="text-blue-700 hover:underline">Home</a>
-		<a href={next.toString()} class="text-blue-700 hover:underline">Next val.</a>
+	<div class="grid grid-cols-3">
+		{#if prev >= 1}
+			<a href={prev.toString()} class="col-start-1 justify-self-start text-blue-700 hover:underline"
+				>Prev. val.</a
+			>
+		{/if}
+		<a href={resolve("/")} class="col-start-2 justify-self-center text-blue-700 hover:underline"
+			>Home</a
+		>
+		{#if next <= MAX_ABJAD_VALUE}
+			<a href={next.toString()} class="col-start-3 justify-self-end text-blue-700 hover:underline"
+				>Next val.</a
+			>
+		{/if}
 	</div>
 {/if}

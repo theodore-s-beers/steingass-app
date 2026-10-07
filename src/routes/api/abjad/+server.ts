@@ -1,3 +1,4 @@
+import { MAX_ABJAD_VALUE } from "#lib/constants.ts";
 import { type AbjadEntry, toPlain } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
@@ -10,7 +11,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const value = Number(valueParam);
-	if (!Number.isInteger(value) || value < 1 || value > 3_500) {
+	if (!Number.isInteger(value) || value < 1 || value > MAX_ABJAD_VALUE) {
 		return new Response("Abjad value out of scope", { status: 400 });
 	}
 
