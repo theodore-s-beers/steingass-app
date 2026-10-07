@@ -36,6 +36,7 @@
 	afterNavigate(async () => {
 		const request = ++navigationRequest;
 		loading = true;
+		entries = [];
 		const data = await fetchPage(pageNumber);
 		if (request === navigationRequest) {
 			entries = data;
