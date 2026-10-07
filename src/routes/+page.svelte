@@ -15,6 +15,9 @@
 	let results: Entry[] = $state([]);
 
 	let hints: string[] = $state([]);
+	let queryRequest = 0;
+	let hintsRequest = 0;
+	let debounce: number;
 
 	function reconcile() {
 		if (field !== "headword_persian" && matchType === "exact") {
@@ -22,27 +25,32 @@
 		}
 
 		if (field !== "headword_persian" || matchType !== "exact") {
+			hintsRequest++;
+			clearTimeout(debounce);
 			hints = [];
 		}
 	}
 
-	let debounce: number;
-
 	function handleInput() {
+		const request = ++hintsRequest;
 		clearTimeout(debounce);
+		hints = [];
 
-		if (field !== "headword_persian" || matchType !== "exact") {
+		if (!term || field !== "headword_persian" || matchType !== "exact") {
 			return;
 		}
 
 		debounce = window.setTimeout(async () => {
 			term = normalize(term);
 			const newHints = await fetchHints(term);
-			hints = newHints;
+			if (request === hintsRequest) {
+				hints = newHints;
+			}
 		}, 400);
 	}
 
 	async function query() {
+		const request = ++queryRequest;
 		loading = true;
 		results = [];
 
@@ -61,15 +69,22 @@
 			}
 
 			const data: Entry[] = await res.json();
-			results = data;
+			if (request === queryRequest) {
+				results = data;
+			}
 		} catch (err) {
 			console.error(err);
 		} finally {
-			loading = false;
+			if (request === queryRequest) {
+				loading = false;
+			}
 		}
 	}
 
 	function clear() {
+		queryRequest++;
+		hintsRequest++;
+		clearTimeout(debounce);
 		term = "";
 		localStorage.removeItem("steingassTermV1");
 		results = [];
