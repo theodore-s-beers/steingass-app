@@ -59,9 +59,13 @@
 		const queryUrl =
 			"/api/entries?" + new URLSearchParams({ field, "match-type": matchType, term });
 
-		localStorage.setItem("steingassFieldV1", field);
-		localStorage.setItem("steingassVerbV1", matchType);
-		localStorage.setItem("steingassTermV1", term);
+		try {
+			localStorage.setItem("steingassFieldV1", field);
+			localStorage.setItem("steingassVerbV1", matchType);
+			localStorage.setItem("steingassTermV1", term);
+		} catch {
+			// Saving prefs is best-effort
+		}
 
 		try {
 			const res = await fetch(queryUrl);
@@ -88,17 +92,26 @@
 		hintsRequest++;
 		clearTimeout(debounce);
 		term = "";
-		localStorage.removeItem("steingassTermV1");
 		results = [];
 		apiLink = "";
 		hints = [];
 		loading = false;
+
+		try {
+			localStorage.removeItem("steingassTermV1");
+		} catch {
+			// Current search is cleared even if the saved term can't be removed
+		}
 	}
 
 	onMount(() => {
-		field = localStorage.getItem("steingassFieldV1") || field;
-		matchType = localStorage.getItem("steingassVerbV1") || matchType;
-		term = localStorage.getItem("steingassTermV1") || term;
+		try {
+			field = localStorage.getItem("steingassFieldV1") || field;
+			matchType = localStorage.getItem("steingassVerbV1") || matchType;
+			term = localStorage.getItem("steingassTermV1") || term;
+		} catch {
+			// Keep current values when saved prefs are unavailable
+		}
 
 		if (term) query();
 	});

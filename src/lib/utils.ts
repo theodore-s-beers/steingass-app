@@ -44,7 +44,7 @@ export function normalize(input: string): string {
 }
 
 export function toFtsQuery(input: string, prefix: boolean): string {
-	// Quote each word so user input cannot become FTS syntax. NUL terminates FTS input.
+	// Quote each word so user input can't become FTS syntax; NUL terminates FTS input
 	return input
 		.split(/[\s\0]+/u)
 		.filter(Boolean)
