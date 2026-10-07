@@ -17,6 +17,15 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("Incomplete input", { status: 400 });
 	}
 
+	const table = parseField(field);
+	if (!table) {
+		return new Response("Invalid search field", { status: 400 });
+	}
+
+	if (!["exact", "token", "prefix"].includes(matchType)) {
+		return new Response("Invalid match type", { status: 400 });
+	}
+
 	// Handle exact match query
 	if (matchType === "exact") {
 		if (field !== "headword_persian") {
@@ -39,7 +48,6 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	// Prepare for FTS query
-	const table = parseField(field);
 	const termParsed = toFtsQuery(term, matchType === "prefix");
 	if (!termParsed) {
 		return new Response("No search term provided", { status: 400 });
@@ -75,7 +83,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	return Response.json(results);
 }
 
-function parseField(field: string): string {
+function parseField(field: string): string | undefined {
 	if (field === "headword_full") {
 		return "ft_hw";
 	}
@@ -88,5 +96,7 @@ function parseField(field: string): string {
 		return "ft_def";
 	}
 
-	return "ft_all";
+	if (field === "any") {
+		return "ft_all";
+	}
 }
