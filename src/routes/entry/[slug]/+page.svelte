@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { AssetPath } from "$app/types";
+	import EntryCard from "#lib/EntryCard.svelte";
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
 	import { type Entry } from "#lib/utils.ts";
-	import { marked } from "marked";
-	import { asset, resolve } from "$app/paths";
+	import { resolve } from "$app/paths";
 
 	let id = $derived(page.params.slug ?? "");
 	let prev = $derived(Number(id) - 1);
@@ -54,51 +53,7 @@
 {#if loading}
 	<p>Loading…</p>
 {:else if entry}
-	<div
-		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
-	>
-		<div class="font-semibold">Page</div>
-		<div>
-			<a
-				href={resolve("/page/[slug]", { slug: entry.page.toString() })}
-				class="text-blue-700 hover:underline"
-			>
-				{entry.page}
-			</a>
-			(<a
-				href={asset(`page-img/${entry.page.toString().padStart(4, "0")}.jpg` as AssetPath)}
-				target="_blank"
-				class="text-blue-700 hover:underline"
-			>
-				Page image
-			</a>)
-		</div>
-
-		<div class="font-semibold">Etym.</div>
-		<div>{entry.lang}</div>
-
-		<div class="font-semibold">HW (full)</div>
-		<div class="font-mix">{@html marked.parseInline(entry.headword_full)}</div>
-
-		<div class="font-semibold">HW (Per.)</div>
-		<div class="font-mix">{entry.headword_persian}</div>
-
-		<div class="font-semibold">Abjad</div>
-		<div>
-			<a
-				href={resolve("/abjad/[slug]", { slug: entry.abjad.toString() })}
-				class="text-blue-700 hover:underline"
-			>
-				{entry.abjad}
-			</a>
-		</div>
-
-		<div class="font-semibold">HW (Lat.)</div>
-		<div class="font-mix">{@html marked.parseInline(entry.headword_latin)}</div>
-
-		<div class="font-semibold">Defs.</div>
-		<div class="font-mix">{@html marked.parseInline(entry.definitions)}</div>
-	</div>
+	<EntryCard {entry} showId={false} />
 {:else}
 	<p>Failed to load entry</p>
 {/if}

@@ -1,9 +1,9 @@
 <script lang="ts">
+	import EntryCard from "#lib/EntryCard.svelte";
 	import type { AssetPath } from "$app/types";
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
 	import { type Entry } from "#lib/utils.ts";
-	import { marked } from "marked";
 	import { asset, resolve } from "$app/paths";
 
 	let pageNumber = $derived(page.params.slug ?? "");
@@ -71,44 +71,7 @@
 <hr class="my-4 border border-dashed border-gray-400" />
 
 {#each entries as entry (entry.id)}
-	<div
-		class="my-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 rounded-md border-2 border-dashed border-blue-700/50 p-4"
-	>
-		<div class="font-semibold">ID</div>
-		<div>
-			<a
-				href={resolve("/entry/[slug]", { slug: entry.id.toString() })}
-				class="text-blue-700 hover:underline"
-			>
-				{entry.id}
-			</a>
-		</div>
-
-		<div class="font-semibold">Etym.</div>
-		<div>{entry.lang}</div>
-
-		<div class="font-semibold">HW (full)</div>
-		<div class="font-mix">{@html marked.parseInline(entry.headword_full)}</div>
-
-		<div class="font-semibold">HW (Per.)</div>
-		<div class="font-mix">{entry.headword_persian}</div>
-
-		<div class="font-semibold">Abjad</div>
-		<div>
-			<a
-				href={resolve("/abjad/[slug]", { slug: entry.abjad.toString() })}
-				class="text-blue-700 hover:underline"
-			>
-				{entry.abjad}
-			</a>
-		</div>
-
-		<div class="font-semibold">HW (Lat.)</div>
-		<div class="font-mix">{@html marked.parseInline(entry.headword_latin)}</div>
-
-		<div class="font-semibold">Defs.</div>
-		<div class="font-mix">{@html marked.parseInline(entry.definitions)}</div>
-	</div>
+	<EntryCard {entry} showPage={false} />
 {/each}
 
 {#if entries.length > 0}
