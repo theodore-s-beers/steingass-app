@@ -1,5 +1,4 @@
 import { toFtsQuery } from "#lib/utils.ts";
-import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
 interface HeadwordEntry {
@@ -27,5 +26,5 @@ export async function GET({ platform, url }: RequestEvent) {
 	const flattened = results.map((row) => row.headword_persian);
 	const unique = [...new Set(flattened)];
 
-	return json(unique);
+	return Response.json(unique);
 }

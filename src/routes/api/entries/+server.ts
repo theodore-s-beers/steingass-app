@@ -1,5 +1,4 @@
 import { type Entry, toFtsQuery, toPlain } from "#lib/utils.ts";
-import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
 interface IdEntry {
@@ -36,7 +35,7 @@ export async function GET({ platform, url }: RequestEvent) {
 			return new Response(toPlain(results));
 		}
 
-		return json(results);
+		return Response.json(results);
 	}
 
 	// Prepare for FTS query
@@ -73,7 +72,7 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response(toPlain(results));
 	}
 
-	return json(results);
+	return Response.json(results);
 }
 
 function parseField(field: string): string {
