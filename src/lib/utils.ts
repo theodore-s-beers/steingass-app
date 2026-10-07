@@ -44,11 +44,12 @@ export function normalize(input: string): string {
 }
 
 export function toFtsQuery(input: string, prefix: boolean): string {
-	// Quote each word so user input can't become FTS syntax; NUL terminates FTS input
+	// Separate punctuation, preserving combining marks and joiners within Persian words
+	// Quote each word so terms like OR cannot become FTS operators
 	return input
-		.split(/[\s\0]+/u)
-		.filter(Boolean)
-		.map((word) => `"${word.replaceAll('"', '""')}"${prefix ? "*" : ""}`)
+		.split(/[^\p{L}\p{N}\p{M}\u200C\u200D]+/u)
+		.filter((word) => /[\p{L}\p{N}]/u.test(word))
+		.map((word) => `"${word}"${prefix ? "*" : ""}`)
 		.join(" AND ");
 }
 
