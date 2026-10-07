@@ -1,3 +1,4 @@
+import { env } from "cloudflare:workers";
 import { toFtsQuery } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
@@ -5,7 +6,7 @@ interface HeadwordEntry {
 	headword_persian: string;
 }
 
-export async function GET({ platform, url }: RequestEvent) {
+export async function GET({ url }: RequestEvent) {
 	const term = url.searchParams.get("term");
 	if (!term) {
 		return new Response("No search term provided", { status: 400 });
@@ -16,7 +17,7 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("No search term provided", { status: 400 });
 	}
 	const sql = "SELECT headword_persian FROM ft_per WHERE ft_per MATCH ? LIMIT 20";
-	const stmt = platform!.env.DB.prepare(sql).bind(termPrefix);
+	const stmt = env.DB.prepare(sql).bind(termPrefix);
 
 	const { results } = await stmt.all<HeadwordEntry>();
 	if (results.length === 0) {

@@ -1,8 +1,9 @@
+import { env } from "cloudflare:workers";
 import { MAX_ABJAD_VALUE } from "#lib/constants.ts";
 import { type AbjadEntry, toPlain } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }: RequestEvent) {
+export async function GET({ url }: RequestEvent) {
 	const valueParam = url.searchParams.get("value");
 	const plainText = url.searchParams.get("plain-text");
 
@@ -16,7 +17,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const sql = "SELECT id, headword_persian FROM entries WHERE abjad = ?";
-	const stmt = platform!.env.DB.prepare(sql).bind(value);
+	const stmt = env.DB.prepare(sql).bind(value);
 	const { results } = await stmt.all<AbjadEntry>();
 
 	if (results.length === 0) {

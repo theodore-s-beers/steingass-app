@@ -1,8 +1,9 @@
+import { env } from "cloudflare:workers";
 import { MAX_PAGE_NUMBER } from "#lib/constants.ts";
 import { type Entry } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }: RequestEvent) {
+export async function GET({ url }: RequestEvent) {
 	const pageNumber = url.searchParams.get("page-number");
 	if (!pageNumber) {
 		return new Response("Page number not provided", { status: 400 });
@@ -14,7 +15,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const sql = "SELECT * FROM entries WHERE page = ?";
-	const stmt = platform!.env.DB.prepare(sql).bind(parsed);
+	const stmt = env.DB.prepare(sql).bind(parsed);
 
 	const { results } = await stmt.all<Entry>();
 	if (results.length === 0) {

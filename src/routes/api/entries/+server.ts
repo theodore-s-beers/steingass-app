@@ -1,3 +1,4 @@
+import { env } from "cloudflare:workers";
 import { type Entry, toFtsQuery, toPlain } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
@@ -5,7 +6,7 @@ interface IdEntry {
 	rowid: number;
 }
 
-export async function GET({ platform, url }: RequestEvent) {
+export async function GET({ url }: RequestEvent) {
 	// Get query parameters
 	const field = url.searchParams.get("field");
 	const matchType = url.searchParams.get("match-type");
@@ -33,7 +34,7 @@ export async function GET({ platform, url }: RequestEvent) {
 		}
 
 		const sql = "SELECT * FROM entries WHERE headword_persian = ?";
-		const stmt = platform!.env.DB.prepare(sql).bind(term);
+		const stmt = env.DB.prepare(sql).bind(term);
 		const { results } = await stmt.all<Entry>();
 
 		if (results.length === 0) {
@@ -55,7 +56,7 @@ export async function GET({ platform, url }: RequestEvent) {
 
 	// Limit to 50 already in the first query
 	const ftSql = `SELECT ROWID FROM ${table} WHERE ${table} MATCH ? LIMIT 50`;
-	const ftStmt = platform!.env.DB.prepare(ftSql).bind(termParsed);
+	const ftStmt = env.DB.prepare(ftSql).bind(termParsed);
 	const ftResult = await ftStmt.all<IdEntry>();
 
 	const ids = ftResult.results.map((row) => row.rowid);
@@ -68,7 +69,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	const questionMarks = ids.map(() => "?").join(", ");
 
 	const sql = `SELECT * FROM entries WHERE id IN (${questionMarks})`;
-	const stmt = platform!.env.DB.prepare(sql).bind(...ids);
+	const stmt = env.DB.prepare(sql).bind(...ids);
 
 	const { results } = await stmt.all<Entry>();
 	if (results.length === 0) {

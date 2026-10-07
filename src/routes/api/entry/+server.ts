@@ -1,8 +1,9 @@
+import { env } from "cloudflare:workers";
 import { MAX_ENTRY_ID } from "#lib/constants.ts";
 import { type Entry } from "#lib/utils.ts";
 import type { RequestEvent } from "./$types";
 
-export async function GET({ platform, url }: RequestEvent) {
+export async function GET({ url }: RequestEvent) {
 	const id = url.searchParams.get("id");
 	if (!id) {
 		return new Response("Entry ID not provided", { status: 400 });
@@ -14,7 +15,7 @@ export async function GET({ platform, url }: RequestEvent) {
 	}
 
 	const sql = "SELECT * FROM entries WHERE id = ?";
-	const stmt = platform!.env.DB.prepare(sql).bind(parsed);
+	const stmt = env.DB.prepare(sql).bind(parsed);
 
 	const result = await stmt.first<Entry>();
 	if (!result) {
