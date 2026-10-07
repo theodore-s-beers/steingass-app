@@ -8,8 +8,8 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("Page number not provided", { status: 400 });
 	}
 
-	const parsed = parseInt(pageNumber);
-	if (parsed < 1 || parsed > 1_539) {
+	const parsed = Number(pageNumber);
+	if (!Number.isInteger(parsed) || parsed < 1 || parsed > 1_539) {
 		return new Response("Invalid page number", { status: 400 });
 	}
 

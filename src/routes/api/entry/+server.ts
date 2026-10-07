@@ -8,8 +8,8 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("Entry ID not provided", { status: 400 });
 	}
 
-	const parsed = parseInt(id);
-	if (parsed < 1 || parsed > 69_888) {
+	const parsed = Number(id);
+	if (!Number.isInteger(parsed) || parsed < 1 || parsed > 69_888) {
 		return new Response("Invalid entry ID", { status: 400 });
 	}
 

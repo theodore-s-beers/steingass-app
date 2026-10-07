@@ -10,8 +10,8 @@ export async function GET({ platform, url }: RequestEvent) {
 		return new Response("Abjad value not provided", { status: 400 });
 	}
 
-	const value = parseInt(valueParam);
-	if (value < 1 || value > 3_500) {
+	const value = Number(valueParam);
+	if (!Number.isInteger(value) || value < 1 || value > 3_500) {
 		return new Response("Abjad value out of scope", { status: 400 });
 	}
 
