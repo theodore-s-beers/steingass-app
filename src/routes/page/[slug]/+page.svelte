@@ -13,6 +13,7 @@
 	let title = $derived(`Steingass – Page ${pageNumber}`);
 
 	let loading = $state(true);
+	let navigationRequest = 0;
 	let entries: Entry[] = $state([]);
 	let count = $derived(entries.length);
 
@@ -32,10 +33,13 @@
 	}
 
 	afterNavigate(async () => {
+		const request = ++navigationRequest;
 		loading = true;
 		const data = await fetchPage(pageNumber);
-		entries = data;
-		loading = false;
+		if (request === navigationRequest) {
+			entries = data;
+			loading = false;
+		}
 	});
 </script>
 

@@ -10,6 +10,7 @@
 	let title = $derived(`Steingass – Abjad value ${abjadValue}`);
 
 	let loading = $state(true);
+	let navigationRequest = 0;
 	let entries: AbjadEntry[] = $state([]);
 	let count = $derived(entries.length);
 
@@ -29,11 +30,14 @@
 	}
 
 	afterNavigate(async () => {
+		const request = ++navigationRequest;
 		loading = true;
 		entries = [];
 		const data = await fetchAbjad(abjadValue);
-		entries = data;
-		loading = false;
+		if (request === navigationRequest) {
+			entries = data;
+			loading = false;
+		}
 	});
 </script>
 

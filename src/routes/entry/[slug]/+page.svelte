@@ -11,6 +11,7 @@
 	let title = $derived(`Steingass – Entry ${id}`);
 
 	let loading = $state(true);
+	let navigationRequest = 0;
 	let entry: Entry | null = $state(null);
 
 	async function fetchEntry(id: string): Promise<Entry | null> {
@@ -29,10 +30,13 @@
 	}
 
 	afterNavigate(async () => {
+		const request = ++navigationRequest;
 		loading = true;
 		const data = await fetchEntry(id);
-		entry = data;
-		loading = false;
+		if (request === navigationRequest) {
+			entry = data;
+			loading = false;
+		}
 	});
 </script>
 
