@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
-	import { type AbjadEntry } from "$lib/utils";
+	import { type AbjadEntry } from "#lib/utils.ts";
 	import { resolve } from "$app/paths";
 
 	let abjadValue = $derived(page.params.slug ?? "");

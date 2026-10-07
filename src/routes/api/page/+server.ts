@@ -1,4 +1,4 @@
-import { type Entry } from "$lib/utils";
+import { type Entry } from "#lib/utils.ts";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 

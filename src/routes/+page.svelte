@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { type Entry, fetchHints, normalize } from "$lib/utils";
+	import type { AssetPath } from "$app/types";
+	import { type Entry, fetchHints, normalize } from "#lib/utils.ts";
 	import { marked } from "marked";
 	import { onMount } from "svelte";
 	import { asset, resolve } from "$app/paths";
@@ -216,7 +217,7 @@
 				{entry.page}
 			</a>
 			(<a
-				href={asset(`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`)}
+				href={asset(`page-img/${entry.page.toString().padStart(4, "0")}.jpg` as AssetPath)}
 				target="_blank"
 				class="text-blue-700 hover:underline"
 			>

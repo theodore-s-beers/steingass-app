@@ -1,7 +1,8 @@
 <script lang="ts">
+	import type { AssetPath } from "$app/types";
 	import { afterNavigate } from "$app/navigation";
 	import { page } from "$app/state";
-	import { type Entry } from "$lib/utils";
+	import { type Entry } from "#lib/utils.ts";
 	import { marked } from "marked";
 	import { asset, resolve } from "$app/paths";
 
@@ -65,7 +66,7 @@
 				{entry.page}
 			</a>
 			(<a
-				href={asset(`/page-img/${entry.page.toString().padStart(4, "0")}.jpg`)}
+				href={asset(`page-img/${entry.page.toString().padStart(4, "0")}.jpg` as AssetPath)}
 				target="_blank"
 				class="text-blue-700 hover:underline"
 			>

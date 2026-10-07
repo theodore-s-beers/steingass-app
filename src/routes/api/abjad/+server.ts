@@ -1,4 +1,4 @@
-import { type AbjadEntry, toPlain } from "$lib/utils";
+import { type AbjadEntry, toPlain } from "#lib/utils.ts";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent } from "./$types";
 
