@@ -12,6 +12,7 @@
 
 	let loading = $state(false);
 	let results: Entry[] = $state([]);
+	let apiLink = $state("");
 
 	let hints: string[] = $state([]);
 	let queryRequest = 0;
@@ -52,17 +53,18 @@
 		const request = ++queryRequest;
 		loading = true;
 		results = [];
+		apiLink = "";
 
 		term = normalize(term);
+		const queryUrl =
+			"/api/entries?" + new URLSearchParams({ field, "match-type": matchType, term });
 
 		localStorage.setItem("steingassFieldV1", field);
 		localStorage.setItem("steingassVerbV1", matchType);
 		localStorage.setItem("steingassTermV1", term);
 
 		try {
-			const res = await fetch(
-				"/api/entries?" + new URLSearchParams({ field, "match-type": matchType, term }),
-			);
+			const res = await fetch(queryUrl);
 			if (!res.ok) {
 				throw new Error(`Failed query: ${res.status}`);
 			}
@@ -70,6 +72,7 @@
 			const data: Entry[] = await res.json();
 			if (request === queryRequest) {
 				results = data;
+				apiLink = queryUrl + "&plain-text=true";
 			}
 		} catch (err) {
 			console.error(err);
@@ -87,6 +90,7 @@
 		term = "";
 		localStorage.removeItem("steingassTermV1");
 		results = [];
+		apiLink = "";
 		hints = [];
 		loading = false;
 	}
@@ -196,12 +200,7 @@
 
 	{#if results.length > 0}
 		<p>
-			<a
-				href={"/api/entries?" +
-					new URLSearchParams({ field, "match-type": matchType, term, "plain-text": "true" })}
-				target="_blank"
-				class="text-blue-700 hover:underline"
-			>
+			<a href={apiLink} target="_blank" class="text-blue-700 hover:underline">
 				API link for this query
 			</a>
 		</p>
