@@ -167,6 +167,7 @@
 	<input
 		type="text"
 		id="term"
+		dir={field === "headword_persian" ? "rtl" : "auto"}
 		list="suggestions"
 		class="w-48 rounded border border-gray-500 px-2.5 py-2 font-mix leading-relaxed"
 		autocomplete="off"
