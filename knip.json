@@ -1,4 +1,7 @@
 {
 	"$schema": "./node_modules/knip/schema.json",
-	"ignoreDependencies": ["@typescript/native", "cloudflare"]
+	"ignoreDependencies": ["@typescript/native"],
+	"ignoreIssues": {
+		"tsconfig.json": ["unlisted"]
+	}
 }
