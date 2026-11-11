@@ -9,5 +9,5 @@ PNPM_VERSION = "12"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "steingass-v2"
-database_id = "7398c42d-b1b5-452d-9091-c5466bb6b76d"
+database_name = "steingass-v3"
+database_id = "04a9e9fe-c81d-4f33-8207-91111a6e3524"
