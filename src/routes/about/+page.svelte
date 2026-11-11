@@ -32,8 +32,8 @@
 </p>
 
 <p class="mb-4">
-	The utility of Steingass’ Persian-English dictionary as an <em>Arabic-English</em> dictionary is
-	also not to be underestimated. If you’re reading, e.g., classical Arabic poetry, you will
+	The utility of Steingass’ Persian-English dictionary as an <em>Arabic-English</em>
+	dictionary is also not to be underestimated. If you’re reading, e.g., classical Arabic poetry, you will
 	encounter many words that are too old-fashioned to be covered in Hans Wehr’s dictionary, but which
 	<em>are</em> included in Steingass’ Persian-focused work. (This is not meant as a criticism of Wehr,
 	which is clearly targeted at MSA.) Could you consult Lane, Hava, etc. for archaic Arabic vocabulary?
@@ -41,8 +41,7 @@
 </p>
 
 <p class="mb-4">
-	A fairly high-resolution scan of the dictionary can be found
-	<a
+	A fairly high-resolution scan of the dictionary can be found <a
 		href="https://archive.org/details/a-comprehensive-persian-english-dictionary/"
 		target="_blank"
 		rel="noreferrer"
@@ -78,8 +77,9 @@
 <p class="mb-4">
 	With the data in hand, it was only a matter of developing a basic frontend app to interface with
 	it. (Well, there are other potentially interesting things that I’ve done with this project—e.g.,
-	calculating abjad values—but I don’t have time to get into it now. Maybe later.) This site is
-	hosted via Cloudflare Pages; the <a
+	calculating <em>abjad</em> values—but I don’t have time to get into it now. Maybe later.) This
+	site is hosted via Cloudflare Pages; the
+	<a
 		href="https://github.com/theodore-s-beers/steingass-app"
 		target="_blank"
 		rel="noreferrer"
